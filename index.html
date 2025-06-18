@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Terima Kasih</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Georgia', serif;
+      background: linear-gradient(to bottom, #111, #444);
+      color: #e0e0e0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .intro, .container {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(to bottom, #111, #444);
+      padding: 20px;
+    }
+
+    .intro h1 {
+      font-size: 3em;
+      color: #f06292;
+      margin-bottom: 20px;
+    }
+
+    .intro p {
+      font-size: 1.2em;
+      color: #ccc;
+      margin-bottom: 30px;
+    }
+
+    .intro button {
+      padding: 10px 25px;
+      font-size: 1.1em;
+      background-color: #f06292;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .intro button:hover {
+      background-color: #d81b60;
+    }
+
+    .container {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    h2 {
+      font-size: 2.5em;
+      color: #f06292;
+      margin-bottom: 20px;
+    }
+
+    .surat {
+      font-size: 1.3em;
+      line-height: 2em;
+      color: #ccc;
+      max-width: 800px;
+      white-space: pre-wrap;
+      text-align: center;
+      min-height: 200px;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 10px;
+      height: 1.2em;
+      background-color: #f06292;
+      animation: blink 1s infinite;
+      vertical-align: bottom;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Intro Section -->
+  <div class="intro" id="intro">
+    <h1>Terima Kasih</h1>
+    <p>Sebuah surat untuk seseorang yang pernah begitu berarti.</p>
+    <button onclick="mulai()">OKE</button>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container" id="container">
+    <h2>Terima Kasih</h2>
+    <div class="surat" id="surat"><span id="text"></span><span class="cursor"></span></div>
+  </div>
+
+  <script>
+    const kalimatList = [
+  "Baca sampai selesai ya...",
+  "Haii...",
+  "Aku cuma mau ngomong sesuatu yang udah lama aku simpan",
+  "Aku pernah (atau mungkin masih) punya rasa ke kamu.",
+  "Aku nggak pernah maksain berharap lebih, aku tahu posisi aku.",
+  "dan aku juga sadar mungkin hatimu sudah punya seseorang.",
+  "aku cuma ingin jujur--.",
+  "bukan buat mengganggu  atau bikin kamu gak nyaman.",
+  "Ini cuma bentuk keberanian kecil dari aku untuk mengakhiri perasaan yang selama ini aku simpan sendiri..",
+  "Terima kasih karena pernah jadi salah satu alasan aku semangat selama ini, meski kamu mungkin gak sadar.",
+  "Aku tidak berani untuk mengatakan ini secara langsung...",
+  "Mungkin ini pernyataan yang datang tiba-tiba.",
+  "Maaf ya, aku cuma ingin kamu tahu.",
+  "Kalau suatu saat nanti ada kesempatan lagi, aku ingin mencobanya.",
+  "Kalau aku boleh minta tolong, mohon jaga rahasia ini ya, cuma diantara kita berdua.",
+  "Malu juga kalau banyak yang tahu hehe.",
+  "— Makasih yaa..."
+];
+
+
+    let kalimatIndex = 0;
+    let kataIndex = 0;
+    let kataArray = [];
+
+    function mulai() {
+      document.getElementById("intro").style.display = "none";
+      document.getElementById("container").style.display = "flex";
+      tampilkanKalimat();
+    }
+
+    function tampilkanKalimat() {
+      if (kalimatIndex >= kalimatList.length) return;
+
+      const textContainer = document.getElementById("text");
+      textContainer.textContent = "";
+      kataArray = kalimatList[kalimatIndex].split(" ");
+      kataIndex = 0;
+
+      ketikKata();
+    }
+
+    function ketikKata() {
+      if (kataIndex < kataArray.length) {
+        document.getElementById("text").textContent += kataArray[kataIndex] + " ";
+        kataIndex++;
+        setTimeout(ketikKata, 300); // lebih lambat antar kata
+      } else {
+        kalimatIndex++;
+        setTimeout(tampilkanKalimat, 3000); // jeda antar kalimat lebih lama
+      }
+    }
+  </script>
+</body>
+</html>
